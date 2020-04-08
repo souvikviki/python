@@ -1,5 +1,6 @@
 from subprocess import call
 import re
+import json
 
 def prerequisites():
     call('pip install pyyaml', shell=True)
@@ -26,18 +27,58 @@ def test():
     print("Souvik")
     print(data['ambari_agents'])
     host_groups = []
+    x = {
+	"blueprint" : "multinode-hdp",
+	"default_password" : "hadoop",
+	"host_groups" :[
+   {
+	"name" : "master_1",
+	"hosts" : [
+	{
+	"fqdn" : "ip-172-31-32-150.ap-south-1.compute.internal"
+	}
+	]
+	},
+   {
+	"name" : "master_2",
+	"hosts" : [
+	{
+	"fqdn" : "ip-172-31-32-234.ap-south-1.compute.internal"
+	}
+	]
+	},
+   {
+	"name" : "slave_1",
+	"hosts" : [
+	{
+	"fqdn" : "ip-172-31-41-226.ap-south-1.compute.internal"
+	}
+	]
+	}
+	]
+    }
+    x["host_groups"] = []
     for i in range(0, len(data['ambari_agents'])):
         print(data['ambari_agents'][i])
         print('ambari_agent_' + str(i+1))
         print(data['ambari_agents'][i]['ambari_agent_' + str(i+1)])
         ambariAgent = 'ambari_agent_' + str(i+1)
         host_groups.append("{"+'name'+":"+'ambari_agent_' +str(i+1)+"'"+"},")
+        x["host_groups"].append({"name": ambariAgent,"hosts":[{"fqdn":data['ambari_agents'][i]['ambari_agent_'+str(i+1)][0]['fqdn']}]})
         for item in range(0, len(data['ambari_agents'][i]['ambari_agent_' + str(i+1)])):
             print(data['ambari_agents'][i]['ambari_agent_' + str(i+1)][item])
     print(host_groups)
     jsonFile = open("hostMapping.json","w+")
-    listToStr = ' '.join(map(str, host_groups)) 
-    jsonFile.write(listToStr)
+    # listToStr = ' '.join(map(str, x)) 
+    jsonFile.write(str(x))
+    
+    # convert into JSON:
+    y = json.dumps(x)
+    # the result is a JSON string:
+    print(y)
+    # print(x["host_groups"][0]['hosts'][0]['fqdn'])
+    print(x)
+    print(data['ambari_agents'][1]['ambari_agent_2'][0]['fqdn'])   
     # print('ZOOKEEPER_SERVER' in data['ambari_agent_12'][2]['components'])
     number_of_agents = data['number_of_agents']
     namenode_directories = data['namenode_directories']

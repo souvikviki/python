@@ -1,0 +1,87 @@
+---
+number_of_agents: 12
+ambari_server:
+  - fqdn: hdpautoambari-1
+  - ip: 52.172.191.176
+ambari_agents:  
+  - ambari_agent_1:
+    - fqdn: hdpautonn-1
+    - ip: 52.172.211.7
+    - components:
+        - NAMENODE
+        - ZKFC
+        - ALL-CLIENTS
+  - ambari_agent_2:
+    - fqdn: hdpautonn-2
+    - ip: 52.172.207.191
+    - components:
+        - NAMENODE
+        - ZKFC
+        - ALL-CLIENTS
+  - ambari_agent_3:
+    - fqdn: hdpautodn-1
+    - ip: 13.71.25.232
+    - components:
+        - ALL-CLIENTS
+  - ambari_agent_4:
+    - fqdn: hdpautodn-2
+    - ip: 13.71.28.112
+    - components:
+        - ALL-CLIENTS
+  - ambari_agent_5:
+    - fqdn: hdpautojn-1
+    - ip: 13.71.26.45
+    - components:
+        - JOURNALNODE
+        - ALL-CLIENTS
+  - ambari_agent_6:
+    - fqdn: hdpautojn-2
+    - ip: 52.140.103.42
+    - components:
+        - JOURNALNODE
+        - ALL-CLIENTS
+  - ambari_agent_7:
+    - fqdn: hdpautojn-3
+    - ip: 52.172.216.86
+    - components:
+        - JOURNALNODE
+        - ALL-CLIENTS
+  - ambari_agent_8:
+    - fqdn: hdpautohb-1
+    - ip: 13.71.3.185
+    - components:
+        - ALL-CLIENTS
+  - ambari_agent_9:
+    - fqdn: hdpautohb-2
+    - ip: 52.172.214.120
+    - components:
+        - ALL-CLIENTS
+  - ambari_agent_10:
+    - fqdn: hdpautozk-1
+    - ip: 13.71.3.93
+    - components:
+        - ZOOKEEPER_SERVER
+        - ALL-CLIENTS
+  - ambari_agent_11:
+    - fqdn: hdpautozk-2
+    - ip: 13.71.26.191
+    - components:
+        - ZOOKEEPER_SERVER
+        - ALL-CLIENTS
+  - ambari_agent_12:
+    - fqdn: hdpautozk-3
+    - ip: 13.71.28.50
+    - components:
+        - ZOOKEEPER_SERVER
+        - ALL-CLIENTS
+hdp_version: 2.6
+namenode_directories:
+  - /data/nn
+datanode_directories:
+  - /data/hdp01
+  - /data/hdp02
+journalnode_directories:
+  - /data/jn
+zookeeper_directories:
+  - /data/zk
+cluster_name: hdpautomation
