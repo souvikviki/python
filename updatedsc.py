@@ -44,10 +44,8 @@ def test():
     }
     x["host_groups"] = []
     for i in range(0, data['number_of_agents']):
-        print(data['ambari_agents'][i]['ambari_agent_' + str(i+1)])
         ambariAgent = 'ambari_agent_' + str(i+1)
-        x["host_groups"].append({"name": ambariAgent,"hosts":[{"fqdn":data['ambari_agents'][i]['ambari_agent_'+str(i+1)][0]['fqdn']}]})
+        x["host_groups"].append({"name": ambariAgent,"hosts":[{"fqdn":data['ambari_agent_'+str(i+1)][0]['fqdn']}]})
     jsonFile = open("hostMapping.json","w+")
     jsonFile.write(str(x))
-    
 test()
