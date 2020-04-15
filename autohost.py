@@ -24,7 +24,6 @@ def test1():
         x["host_groups"].append({"name": ambariAgent,"hosts":[{"fqdn":data['ambari_agent_'+str(i+1)][0]['fqdn']}]})
     jsonFile = open("hostmapping.json","w+")
     y = json.dumps(x)
-    print(y)
     jsonFile.write(y)
 
 test1()
